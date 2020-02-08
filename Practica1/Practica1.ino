@@ -192,6 +192,7 @@ void updateEstados() {
         playableArea.gameArray[0] = S_GAME_OVER;//Para debugging
         if (isStartPressed && !wasStartPressed) 
         {
+            
             estadoActual = S_MENSAJE;
             break;
         }
