@@ -12,11 +12,10 @@ void JuegoClass::paintByte(byte num)
 	String s = String(num);
 	if (num < 9) 
 	{
-		s = "0" + num;
+		s = String("0") + s;
 	}
 	byte firstDigit = s[s.length() - 2] - 48 + ALF_CERO;//msd
 	byte secondDigit = s[s.length() - 1] - 48 + ALF_CERO;//lsd
-	
 	playableArea.draw(0, 0, alfabeto[firstDigit], SIZEOF_MYCHAR);
 	playableArea.draw(0, 8, alfabeto[secondDigit], SIZEOF_MYCHAR);
 }
@@ -41,7 +40,11 @@ void JuegoClass::update(bool isLeftPressed, bool wasLeftPressed, bool isRightPre
 
 void JuegoClass::pause()
 {
-	paintByte(conteoSeg);
+	if (paintSegs) {//Variable booleana para que dibuje 1 solavez el conteno de segundos
+		paintByte(conteoSeg);
+		paintSegs = false;
+	}
+	//hacer nada
 }
 
 void JuegoClass::reset()

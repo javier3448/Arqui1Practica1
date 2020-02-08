@@ -1,6 +1,6 @@
-C:\Users\javie\AppData\Local\Temp\VMBuilds\Practica1\uno\Release\Sipo3.cpp.o: \
- C:\Users\javie\AppData\Local\Temp\VMBuilds\Practica1\uno\Release\Sipo3.cpp \
- C:\Users\javie\AppData\Local\Temp\VMBuilds\Practica1\uno\Release\Sipo3.h \
+C:\Users\Alvarez\AppData\Local\Temp\VMBuilds\Practica1\uno\Release\Sipo3.cpp.o: \
+ C:\Users\Alvarez\AppData\Local\Temp\VMBuilds\Practica1\uno\Release\Sipo3.cpp \
+ C:\Users\Alvarez\AppData\Local\Temp\VMBuilds\Practica1\uno\Release\Sipo3.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \

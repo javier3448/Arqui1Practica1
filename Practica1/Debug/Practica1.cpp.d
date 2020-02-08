@@ -11,8 +11,11 @@ C:\Users\Alvarez\AppData\Local\Temp\VMBuilds\Practica1\uno\Debug\Practica1.cpp.o
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\standard/pins_arduino.h \
+ C:\Users\Alvarez\AppData\Local\Temp\VMBuilds\Practica1\uno\Debug\Juego.h \
+ C:\Users\Alvarez\AppData\Local\Temp\VMBuilds\Practica1\uno\Debug\Definiciones.h \
+ C:\Users\Alvarez\AppData\Local\Temp\VMBuilds\Practica1\uno\Debug\PlayableArea.h \
+ C:\Users\Alvarez\AppData\Local\Temp\VMBuilds\Practica1\uno\Debug\Sipo3.h \
  C:\Users\Alvarez\AppData\Local\Temp\VMBuilds\Practica1\uno\Debug\Max7219Driver.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src/SPI.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
- C:\Users\Alvarez\AppData\Local\Temp\VMBuilds\Practica1\uno\Debug\Piso3.h \
  c:\program\ files\ (x86)\microsoft\ visual\ studio\2019\community\common7\ide\extensions\p1hbfuhp.cmm\Micro\ Platforms\default\debuggers\VM_DBG/VM_DBG.h

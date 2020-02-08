@@ -17,6 +17,7 @@ class JuegoClass
 	 unsigned long inicioTiempo = 0;
 
  public:
+	 bool paintSegs = true;
 	 JuegoClass();
 	 void update(bool isLeftPressed, bool wasLeftPressed, bool isRightPressed, bool wasRightPressed);
 	 void pause();

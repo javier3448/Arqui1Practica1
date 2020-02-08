@@ -25,7 +25,7 @@ const byte PIN_BTN_IZQ = 2;
 const byte PIN_BTN_DER = 3;
 const byte PIN_BTN_START = 4;
 const byte PIN_POT = A5;
-const byte PIN_SWITCH = 2;
+const byte PIN_SWITCH = 8;
 
 void setup() {
     randomSeed(analogRead(A0));
@@ -35,6 +35,7 @@ void setup() {
     pinMode(PIN_BTN_START, INPUT_PULLUP);
     pinMode(PIN_SWITCH, INPUT_PULLUP);
     playableArea.clear();
+    Serial.begin(9600);
 }
 
 
@@ -148,8 +149,9 @@ void updateEstados() {
         juego.update(isLeftPressed, wasLeftPressed, isRightPressed, wasRightPressed);
         if (isStartPressed && !wasStartPressed) 
         {
-            estadoActual = S_HOLD_PAUSA;
             holdInicial = millis();
+            estadoActual = S_HOLD_PAUSA;
+            juego.paintSegs = true;
             break;
         }
         //Juego
