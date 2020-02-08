@@ -5,6 +5,7 @@
 */
 
 //No necesitamos PISO. Solo SIPO
+#include "Enemigo.h"
 #include "Juego.h"
 #include "Definiciones.h"
 #include "PlayableArea.h"
@@ -62,7 +63,7 @@ void updatePantalla()
     driverP2.send(p2Data);
 
     //Actualiza la pantalla 1
-    driverP1.setRow(updatePantallaCount, playableArea.gameArray[15 - updatePantallaCount]);//Invierte la segunda pantalla para que se pueda ver mejor en el protoboard que ya esta hecho
+    driverP1.setRow(updatePantallaCount, playableArea.gameArray[(GAME_ARRAY_SIZE - 2) - updatePantallaCount]);//Invierte la segunda pantalla para que se pueda ver mejor en el protoboard que ya esta hecho
 
     updatePantallaCount++;
     updatePantallaCount &= 0b111;
@@ -117,6 +118,7 @@ void updateEstados() {
         if (millis() - holdInicial >= 3000) 
         {
             holdInicial = 0;
+            playableArea.clear();
             estadoActual = S_CONTEO;
             break;
         }
@@ -134,6 +136,7 @@ void updateEstados() {
             holdInicial = millis();
             if (numero <= ALF_CERO) {
                 numero = ALF_CERO + 3;
+                juego.draw();
                 estadoActual = S_JUEGO;
                 break;
             }
@@ -145,17 +148,18 @@ void updateEstados() {
         break;
     case S_JUEGO:
         //Codigo para manejar estado: S_JUEGO
-        playableArea.gameArray[0] = S_JUEGO;//Para debugging
-        juego.update(isLeftPressed, wasLeftPressed, isRightPressed, wasRightPressed);
+        //playableArea.gameArray[0] = S_JUEGO;//Para debugging
         if (isStartPressed && !wasStartPressed) 
         {
             holdInicial = millis();
-            estadoActual = S_HOLD_PAUSA;
+            playableArea.clear();
             juego.paintSegs = true;
+            estadoActual = S_HOLD_PAUSA;
             break;
         }
         //Juego
-        if (isRightPressed && !wasRightPressed/*juego.update()*/) {
+        if (!juego.tryUpdate(isLeftPressed, wasLeftPressed, isRightPressed, wasRightPressed)) {
+            playableArea.clear();
             estadoActual = S_GAME_OVER;
             break;
         }
@@ -163,6 +167,7 @@ void updateEstados() {
     case S_HOLD_PAUSA:
         //Codigo para manejar estado: S_PAUSA
         playableArea.gameArray[0] = S_HOLD_PAUSA;//Para debugging
+        juego.pause();
         //juego.pause(); Le dice al juego que haga el render de pause();
         if (!isStartPressed && !wasStartPressed)
         {
@@ -171,6 +176,7 @@ void updateEstados() {
         }
         if (millis() - holdInicial >= 3000) 
         {
+            playableArea.clear();
             estadoActual = S_MENSAJE;
             break;
         }
@@ -182,6 +188,7 @@ void updateEstados() {
         juego.pause();
         if (isStartPressed && !wasStartPressed)
         {
+            playableArea.clear();
             estadoActual = S_CONTEO;
             break;
         }

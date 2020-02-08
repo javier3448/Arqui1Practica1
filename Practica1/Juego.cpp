@@ -26,12 +26,43 @@ JuegoClass::JuegoClass()
 	
 }
 
-void JuegoClass::update(bool isLeftPressed, bool wasLeftPressed, bool isRightPressed, bool wasRightPressed)
+bool JuegoClass::tryUpdate(bool isLeftPressed, bool wasLeftPressed, bool isRightPressed, bool wasRightPressed)
+{
+	cronometro();
+
+	if (isLeftPressed && !wasLeftPressed && !jugador.tryMove(-1)) {
+		return false;
+	}
+
+	if (isRightPressed && !wasRightPressed && !jugador.tryMove(1)) {
+		return false;
+	}
+
+	//Spawner:
+	if (enemy.isNull) 
+	{
+		enemy = EnemigoClass(random(0, sizeof(playableArea.gameArray[0]) * 8 - 2), -1);
+	}
+
+	char enemyResult = enemy.update();
+	if (enemyResult == EnemigoClass::KILLS)
+	{
+		return false;
+	}
+
+	if (enemyResult == EnemigoClass::DIES) 
+	{
+		enemy.destroy();
+	}//Quitar todo lo de enemy
+	return true;
+}
+
+void JuegoClass::cronometro()
 {
 	if (millis() - inicioTiempo >= 1000) {
 		inicioTiempo = millis();
 		conteoSeg++;
-		if ((conteoSeg % 10) == 10) 
+		if ((conteoSeg % 10) == 10)
 		{
 			//subir velocidad
 		}
@@ -50,4 +81,15 @@ void JuegoClass::pause()
 void JuegoClass::reset()
 {
 	inicioTiempo = millis();
+}
+
+void JuegoClass::draw()
+{
+	playableArea.clear();
+	//dibujar enemigos
+	if (!enemy.isNull)
+	{
+		enemy.redraw();
+	}
+	jugador.redraw();
 }

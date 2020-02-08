@@ -123,6 +123,9 @@
     <ClInclude Include="..\..\..\..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src\SPI.h">
       <Filter>src\_micro-api-readonly\libraries\SPI</Filter>
     </ClInclude>
+    <ClInclude Include="Enemigo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Max7219Driver.cpp">
@@ -217,6 +220,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src\SPI.cpp">
       <Filter>src\_micro-api-readonly\libraries\SPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemigo.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

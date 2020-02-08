@@ -9,19 +9,22 @@
 	#include "WProgram.h"
 #endif
 
-#define SIZEOF_PLAYER_SPRITE
+#define SIZEOF_PLAYER_SPRITE 2
 
 class JugadorClass
-{
+{ 
  private:
-	 byte sprite[SIZEOF_PLAYER_SPRITE];
+	 static byte sprite[SIZEOF_PLAYER_SPRITE] ;
 	 char xPos;
-	 char yPos;
+	 const char yPos = 14;
+	 void clearPart();
 
  public:
+	 JugadorClass(char xPos);
 	 //false si murio
 	 bool tryUpdate(char dir);
-
+	 bool tryMove(char dir);
+	 void redraw();
 };
 
 

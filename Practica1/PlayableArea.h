@@ -9,7 +9,7 @@
 	#include "WProgram.h"
 #endif
 
-#define GAME_ARRAY_SIZE 16
+#define GAME_ARRAY_SIZE 17
 
 class PlayableAreaClass
 {
@@ -17,23 +17,25 @@ public:
 	//gameArray podria ser private o protected pero que hueva
 	//Si quisieramos incrementar el tamanno de la pantalla a la derecha tenenmos que cambiar byte por short, int o cualquier otro numero con mas capacidad
 	byte gameArray[GAME_ARRAY_SIZE] = {//MATRIX 1
-		0x01,
-		0x02,
-		0x03,
-		0x04,
-		0x05,
-		0x06,
-		0x07,
-		0x08,
+		0xff,
+		0xfe,
+		0xfd,
+		0xfc,
+		0xfb,
+		0xfa,
+		0xf9,
+		0xf8,
 		//MATRIX 2
-		0x09,
-		0x0a,
-		0x0b,
-		0x0c,
-		0x0d,
-		0x0e,
-		0x0f,
-		0x10 };
+		0xf7,
+		0xf6,
+		0xf5,
+		0xf4,
+		0xf3,
+		0xf2,
+		0xf1,
+		0xf0,
+		0xef
+	};
 
 	void clear();
 	void fill();
