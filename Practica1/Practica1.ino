@@ -9,14 +9,13 @@
 #include "Juego.h"
 #include "Definiciones.h"
 #include "PlayableArea.h"
-#include "Sipo3.h"
 #include "Max7219Driver.h"
 #include "Sipo3.h"
 #include "Definiciones.h"
 #include "Juego.h"
 
 
-Max7219Driver driverP1 = Max7219Driver(10);
+Max7219Driver driverP1 = Max7219Driver(53);
 Sipo3 driverP2 = Sipo3(7, 6, 5, LSBFIRST, 2);
 JuegoClass juego = JuegoClass();
 //Mensaje mensaje = Mensaje();
@@ -160,6 +159,7 @@ void updateEstados() {
         //Juego
         if (!juego.tryUpdate(isLeftPressed, wasLeftPressed, isRightPressed, wasRightPressed)) {
             playableArea.clear();
+            juego.paintSegs = true;
             estadoActual = S_GAME_OVER;
             break;
         }
@@ -167,7 +167,7 @@ void updateEstados() {
     case S_HOLD_PAUSA:
         //Codigo para manejar estado: S_PAUSA
         playableArea.gameArray[0] = S_HOLD_PAUSA;//Para debugging
-        juego.pause();
+        juego.pauseAndPrintScore();
         //juego.pause(); Le dice al juego que haga el render de pause();
         if (!isStartPressed && !wasStartPressed)
         {
@@ -177,6 +177,7 @@ void updateEstados() {
         if (millis() - holdInicial >= 3000) 
         {
             playableArea.clear();
+            juego.reset();
             estadoActual = S_MENSAJE;
             break;
         }
@@ -185,7 +186,7 @@ void updateEstados() {
     case S_PAUSA:
         playableArea.gameArray[0] = S_PAUSA;//Para debugging
         //juego.pause(); Le dice al juego que haga el render de pause();
-        juego.pause();
+        juego.pauseAndPrintScore();
         if (isStartPressed && !wasStartPressed)
         {
             playableArea.clear();
@@ -197,9 +198,11 @@ void updateEstados() {
         //Codigo para manejar estado: S_GAME_OVER
         //juego.gameOver(); Le dice al juego que haga el render de gameOver();
         playableArea.gameArray[0] = S_GAME_OVER;//Para debugging
+        juego.pauseAndPrintScore();
         if (isStartPressed && !wasStartPressed) 
         {
-            
+            playableArea.clear();
+            juego.reset();
             estadoActual = S_MENSAJE;
             break;
         }

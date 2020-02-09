@@ -30,6 +30,8 @@ void Max7219Driver::clear()
 void Max7219Driver::setUp()
 {
 	pinMode(SS_PIN, OUTPUT);
+	pinMode(PIN_SPI_MOSI, OUTPUT);
+	pinMode(PIN_SPI_SCK, OUTPUT);
 	digitalWrite(SS_PIN, HIGH);
 
 	beginTransaction();

@@ -1,6 +1,6 @@
-C:\Users\ricar\AppData\Local\Temp\VMBuilds\Practica1\uno\Release\Definiciones.cpp.o: \
- C:\Users\ricar\AppData\Local\Temp\VMBuilds\Practica1\uno\Release\Definiciones.cpp \
- C:\Users\ricar\AppData\Local\Temp\VMBuilds\Practica1\uno\Release\Definiciones.h \
+C:\Users\Alvarez\AppData\Local\Temp\VMBuilds\Practica1\mega_atmega2560\Release\Definiciones.cpp.o: \
+ C:\Users\Alvarez\AppData\Local\Temp\VMBuilds\Practica1\mega_atmega2560\Release\Definiciones.cpp \
+ C:\Users\Alvarez\AppData\Local\Temp\VMBuilds\Practica1\mega_atmega2560\Release\Definiciones.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
@@ -11,4 +11,4 @@ C:\Users\ricar\AppData\Local\Temp\VMBuilds\Practica1\uno\Release\Definiciones.cp
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Printable.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\standard/pins_arduino.h
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\mega/pins_arduino.h

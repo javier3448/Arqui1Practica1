@@ -38,23 +38,56 @@ bool JuegoClass::tryUpdate(bool isLeftPressed, bool wasLeftPressed, bool isRight
 		return false;
 	}
 
-	//Spawner:
-	if (enemy.isNull) 
-	{
-		enemy = EnemigoClass(random(0, sizeof(playableArea.gameArray[0]) * 8 - 2), -1);
-	}
+	spawnEnemigos();
 
-	char enemyResult = enemy.update();
-	if (enemyResult == EnemigoClass::KILLS)
+	EnemigoClass::startUpdate();
+	for (byte i = 0; i < SIZEOF_ENEMIGOS; i++)
 	{
-		return false;
-	}
+		auto& enemy = enemigos[i];
+		if (!enemy)
+		{
+			continue;
+		}
 
-	if (enemyResult == EnemigoClass::DIES) 
-	{
-		enemy.destroy();
-	}//Quitar todo lo de enemy
+		char enemyResult = enemy.update();
+		if (enemyResult == EnemigoClass::KILLS)
+		{
+			return false;
+		}
+
+		if (enemyResult == EnemigoClass::DIES)
+		{
+			enemy.destroy();
+		}//Quitar todo lo de enemy
+	}
+	EnemigoClass::endUpdate();
+
 	return true;
+}
+
+void JuegoClass::spawnEnemigos()
+{
+	char availableIndex = -1;
+	char yDistance = random(4, 7);
+	for (byte i = 0; i < SIZEOF_ENEMIGOS; i++) 
+	{
+		if (enemigos[i]) 
+		{
+			if (enemigos[i].getYPos() < yDistance)
+			{
+				return;
+			}
+		}
+		else
+		{
+			availableIndex = i;
+		}
+	}
+
+	if (availableIndex >= 0) 
+	{
+		enemigos[availableIndex] = EnemigoClass(random(0, sizeof(playableArea.gameArray[0]) * 8 - 3), -1);
+	}
 }
 
 void JuegoClass::cronometro()
@@ -69,7 +102,7 @@ void JuegoClass::cronometro()
 	}
 }
 
-void JuegoClass::pause()
+void JuegoClass::pauseAndPrintScore()
 {
 	if (paintSegs) {//Variable booleana para que dibuje 1 solavez el conteno de segundos
 		paintByte(conteoSeg);
@@ -81,15 +114,25 @@ void JuegoClass::pause()
 void JuegoClass::reset()
 {
 	inicioTiempo = millis();
+	for (byte i = 0; i < SIZEOF_ENEMIGOS; i++)
+	{
+		enemigos[i].destroy();
+	}
+	conteoSeg = 0;
+	jugador.setXPos(3);
 }
 
 void JuegoClass::draw()
 {
 	playableArea.clear();
 	//dibujar enemigos
-	if (!enemy.isNull)
+	for (byte i = 0; i < SIZEOF_ENEMIGOS; i++)
 	{
-		enemy.redraw();
+		auto& enemy = enemigos[i];
+		if (enemy)
+		{
+			enemy.redraw();
+		}
 	}
 	jugador.redraw();
 }

@@ -24,6 +24,7 @@ class JugadorClass
 	 //false si murio
 	 bool tryUpdate(char dir);
 	 bool tryMove(char dir);
+	 void setXPos(char xPos);
 	 void redraw();
 };
 

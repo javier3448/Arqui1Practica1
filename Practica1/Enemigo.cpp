@@ -14,6 +14,11 @@ byte EnemigoClass::sprite[SIZEOF_ENEMY_SPRITE] = {
 												 };
 
 
+EnemigoClass::operator bool() const
+{
+	return !isNull;
+}
+
 EnemigoClass::EnemigoClass(char xPos, char yPos)
 {
 	isNull = false;
@@ -26,11 +31,16 @@ EnemigoClass::EnemigoClass()
 	isNull = true;
 }
 
-char EnemigoClass::update()
+//startUpdate y endUpdate son un chapuz para que todos los carros tengan el mismo conteo y todos se muevan al mismo tiempo
+
+void EnemigoClass::startUpdate()
 {
 	tickCount++;
+}
+
+char EnemigoClass::update()
+{
 	if (tickCount >= tickFrequency) {
-		tickCount = 0;
 		clearPart();
 		char yVirtual = yPos + 1;
 		if (yVirtual >= GAME_ARRAY_SIZE - 1)
@@ -45,6 +55,14 @@ char EnemigoClass::update()
 		redraw();
 	}
 	return NOTHING;
+}
+
+void EnemigoClass::endUpdate()
+{
+	if (tickCount >= tickFrequency) 
+	{
+		tickCount = 0;
+	}
 }
 
 void EnemigoClass::redraw()
@@ -62,4 +80,14 @@ void EnemigoClass::clearPart()
 void EnemigoClass::destroy()
 {
 	isNull = true;
+}
+
+char EnemigoClass::getXPos()
+{
+	return xPos;
+}
+
+char EnemigoClass::getYPos()
+{
+	return yPos;
 }

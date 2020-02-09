@@ -20,21 +20,24 @@ private:
 	char xPos;
 	char yPos;
 	void clearPart();
-
+	bool isNull = true;
 
 public:
 	static const char NOTHING = 0;
 	static const char DIES = 1;
 	static const char KILLS = 2;
 
-	bool isNull =true;
-
+	operator bool() const;
 	EnemigoClass(char xPos, char yPos);
 	EnemigoClass();
 	//KILLS: si mato al jugador, DIES: si salio de la pantalla, NOTHING: si no pasa nada
+	static void startUpdate();
 	char update();
+	static void endUpdate();
 	void redraw();
 	void destroy();
+	char getXPos();
+	char getYPos();
 };
 
 

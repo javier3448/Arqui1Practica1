@@ -52,6 +52,11 @@ bool JugadorClass::tryMove(char dir)
 	return true;
 }
 
+void JugadorClass::setXPos(char xPos)
+{
+	this->xPos = xPos;
+}
+
 
 
 
