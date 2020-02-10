@@ -5,8 +5,8 @@
 #include "Enemigo.h"
 #include "PlayableArea.h"
 
-unsigned long EnemigoClass::tickCount = 0;
-unsigned long EnemigoClass::tickFrequency = 100;
+int EnemigoClass::tickCount = 0;
+int EnemigoClass::tickPeriod = 200;
 
 byte EnemigoClass::sprite[SIZEOF_ENEMY_SPRITE] = {
 												     0b11100000,
@@ -40,7 +40,7 @@ void EnemigoClass::startUpdate()
 
 char EnemigoClass::update()
 {
-	if (tickCount >= tickFrequency) {
+	if (tickCount >= tickPeriod) {
 		clearPart();
 		char yVirtual = yPos + 1;
 		if (yVirtual >= (GAME_ARRAY_SIZE - 1))
@@ -59,7 +59,7 @@ char EnemigoClass::update()
 
 void EnemigoClass::endUpdate()
 {
-	if (tickCount >= tickFrequency) 
+	if (tickCount >= tickPeriod) 
 	{
 		tickCount = 0;
 	}
@@ -68,12 +68,15 @@ void EnemigoClass::endUpdate()
 void EnemigoClass::reset()
 {
 	tickCount = 0;
-	tickFrequency = 100;
+	tickPeriod = 200;
 }
 
 void EnemigoClass::increaseTickFrequency()
 {
-	tickFrequency -= 10;
+	if (tickPeriod - 25 > 0) //Chequea que no pase overflow. Talvez sea mejor usar una variable con signo en vez de chequear overflow
+	{
+		tickPeriod -= 25;
+	}
 }
 
 void EnemigoClass::redraw()

@@ -1,4 +1,4 @@
-C:\Users\Alvarez\AppData\Local\Temp\VMBuilds\Practica1\mega_atmega2560\Release\SPI\SPI.cpp.o: \
+C:\Users\raulx\AppData\Local\Temp\VMBuilds\Practica1\mega_atmega2560\Release\SPI\SPI.cpp.o: \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src\SPI.cpp \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src\SPI.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \

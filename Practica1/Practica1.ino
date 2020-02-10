@@ -70,7 +70,7 @@ void updatePantalla()
 
     updatePantallaCount++;
     updatePantallaCount &= 0b111;
-    delayMicroseconds(2000);
+    delayMicroseconds(750);
 }
 
 const byte S_MENSAJE = 0;

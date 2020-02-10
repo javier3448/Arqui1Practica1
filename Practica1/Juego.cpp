@@ -98,7 +98,7 @@ void JuegoClass::cronometro()
 	if (millis() - inicioTiempo >= 1000) {
 		inicioTiempo = millis();
 		conteoSeg++;
-		if ((conteoSeg % 10) == 10)
+		if ((conteoSeg % 10) == 0)
 		{
 			EnemigoClass::increaseTickFrequency();
 		}
