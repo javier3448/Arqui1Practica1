@@ -28,7 +28,7 @@ JugadorClass::JugadorClass(char xPos)
 bool JugadorClass::tryUpdate(char dir)
 {
 	if (dir) {
-		tryMove(dir);
+		return tryMove(dir);
 	}
 	return true;
 }

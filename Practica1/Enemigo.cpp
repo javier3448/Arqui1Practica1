@@ -5,8 +5,8 @@
 #include "Enemigo.h"
 #include "PlayableArea.h"
 
-unsigned int EnemigoClass::tickCount = 0;
-unsigned int EnemigoClass::tickFrequency = 100;
+unsigned long EnemigoClass::tickCount = 0;
+unsigned long EnemigoClass::tickFrequency = 100;
 
 byte EnemigoClass::sprite[SIZEOF_ENEMY_SPRITE] = {
 												     0b11100000,
@@ -43,7 +43,7 @@ char EnemigoClass::update()
 	if (tickCount >= tickFrequency) {
 		clearPart();
 		char yVirtual = yPos + 1;
-		if (yVirtual >= GAME_ARRAY_SIZE - 1)
+		if (yVirtual >= (GAME_ARRAY_SIZE - 1))
 		{
 			return DIES;
 		}
@@ -65,10 +65,19 @@ void EnemigoClass::endUpdate()
 	}
 }
 
+void EnemigoClass::reset()
+{
+	tickCount = 0;
+	tickFrequency = 100;
+}
+
+void EnemigoClass::increaseTickFrequency()
+{
+	tickFrequency -= 10;
+}
+
 void EnemigoClass::redraw()
 {
-	Serial.print("posy: ");
-	Serial.println((int)yPos);
 	playableArea.drawOnes(xPos, yPos, sprite, SIZEOF_ENEMY_SPRITE);
 }
 
@@ -79,6 +88,7 @@ void EnemigoClass::clearPart()
 
 void EnemigoClass::destroy()
 {
+	clearPart();
 	isNull = true;
 }
 

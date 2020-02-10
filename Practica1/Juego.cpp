@@ -23,33 +23,27 @@ void JuegoClass::paintByte(byte num)
 
 JuegoClass::JuegoClass()
 {
-	
+	for (char i = 0; i < SIZEOF_ENEMIGOS; i++)
+	{
+		enemigos[i] = EnemigoClass();
+	}
 }
 
 bool JuegoClass::tryUpdate(bool isLeftPressed, bool wasLeftPressed, bool isRightPressed, bool wasRightPressed)
 {
 	cronometro();
 
-	if (isLeftPressed && !wasLeftPressed && !jugador.tryMove(-1)) {
-		return false;
-	}
-
-	if (isRightPressed && !wasRightPressed && !jugador.tryMove(1)) {
-		return false;
-	}
-
 	spawnEnemigos();
 
 	EnemigoClass::startUpdate();
-	for (byte i = 0; i < SIZEOF_ENEMIGOS; i++)
+	for (char i = 0; i < SIZEOF_ENEMIGOS; i++)
 	{
-		auto& enemy = enemigos[i];
-		if (!enemy)
+		if (!enemigos[i])
 		{
 			continue;
 		}
 
-		char enemyResult = enemy.update();
+		char enemyResult = enemigos[i].update();
 		if (enemyResult == EnemigoClass::KILLS)
 		{
 			return false;
@@ -57,10 +51,18 @@ bool JuegoClass::tryUpdate(bool isLeftPressed, bool wasLeftPressed, bool isRight
 
 		if (enemyResult == EnemigoClass::DIES)
 		{
-			enemy.destroy();
+			enemigos[i].destroy();
 		}//Quitar todo lo de enemy
 	}
 	EnemigoClass::endUpdate();
+
+	if (isLeftPressed && !wasLeftPressed && !jugador.tryUpdate(-1)) {
+		return false;
+	}
+
+	if (isRightPressed && !wasRightPressed && !jugador.tryUpdate(1)) {
+		return false;
+	}
 
 	return true;
 }
@@ -68,8 +70,8 @@ bool JuegoClass::tryUpdate(bool isLeftPressed, bool wasLeftPressed, bool isRight
 void JuegoClass::spawnEnemigos()
 {
 	char availableIndex = -1;
-	char yDistance = random(4, 7);
-	for (byte i = 0; i < SIZEOF_ENEMIGOS; i++) 
+	char yDistance = (char) random(4, 6);
+	for (char i = 0; i < SIZEOF_ENEMIGOS; i++) 
 	{
 		if (enemigos[i]) 
 		{
@@ -87,6 +89,7 @@ void JuegoClass::spawnEnemigos()
 	if (availableIndex >= 0) 
 	{
 		enemigos[availableIndex] = EnemigoClass(random(0, sizeof(playableArea.gameArray[0]) * 8 - 3), -1);
+		enemigos[availableIndex].redraw();
 	}
 }
 
@@ -97,7 +100,7 @@ void JuegoClass::cronometro()
 		conteoSeg++;
 		if ((conteoSeg % 10) == 10)
 		{
-			//subir velocidad
+			EnemigoClass::increaseTickFrequency();
 		}
 	}
 }
@@ -114,19 +117,21 @@ void JuegoClass::pauseAndPrintScore()
 void JuegoClass::reset()
 {
 	inicioTiempo = millis();
-	for (byte i = 0; i < SIZEOF_ENEMIGOS; i++)
+	EnemigoClass::reset();
+	for (char i = 0; i < SIZEOF_ENEMIGOS; i++)
 	{
 		enemigos[i].destroy();
 	}
 	conteoSeg = 0;
 	jugador.setXPos(3);
+
 }
 
 void JuegoClass::draw()
 {
 	playableArea.clear();
 	//dibujar enemigos
-	for (byte i = 0; i < SIZEOF_ENEMIGOS; i++)
+	for (char i = 0; i < SIZEOF_ENEMIGOS; i++)
 	{
 		auto& enemy = enemigos[i];
 		if (enemy)

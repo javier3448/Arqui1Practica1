@@ -39,7 +39,9 @@ void PlayableAreaClass::drawOnes(char x, char y, byte data[], byte sizeOfData)
 
 	for (byte i = 0; i < sizeOfData && i + y < GAME_ARRAY_SIZE; i++)
 	{
-		byte currY = i + y;
+		char currY = i + y;
+		if (currY < 0)
+			continue;
 		byte currData = data[i];
 		if (x < 0)
 			currData = currData << -x;//Quita el negativo
@@ -56,7 +58,9 @@ void PlayableAreaClass::clearOnes(char x, char y, byte data[], byte sizeOfData)
 
 	for (byte i = 0; i < sizeOfData && i + y < GAME_ARRAY_SIZE; i++)
 	{
-		byte currY = i + y;
+		char currY = i + y;
+		if (currY < 0)
+			continue;
 		byte currData = data[i];
 		if (x < 0)
 			currData = currData << -x;//Quita el negativo
@@ -87,7 +91,9 @@ void PlayableAreaClass::draw(char x, char y, byte data[], byte sizeOfData)
 
 	for (byte i = 0; i < sizeOfData && i + y < GAME_ARRAY_SIZE; i++)
 	{
-		byte currY = i + y;
+		char currY = i + y;
+		if (currY < 0)
+			continue;
 		//El ~ es un Chapuz para que shiftee 1s y no 0s
 		byte currData = data[i];
 		if (x < 0)
@@ -105,7 +111,7 @@ void PlayableAreaClass::draw(char x, char y, byte data[], byte sizeOfData)
 
 void PlayableAreaClass::drawRow(char x, char y, byte data)
 {
-	if (x >= (char)sizeof(gameArray[0]) * 8 || y >= GAME_ARRAY_SIZE)
+	if (x >= (char)sizeof(gameArray[0]) * 8 || y >= GAME_ARRAY_SIZE || y < 0)
 		return;
 
 	//El ~ es un Chapuz para que shiftee 1s y no 0s. tiene que existir una mejor manaera de hacer estas operaciones bitwise

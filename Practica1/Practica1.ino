@@ -34,6 +34,8 @@ void setup() {
     pinMode(PIN_BTN_DER, INPUT_PULLUP);
     pinMode(PIN_BTN_START, INPUT_PULLUP);
     pinMode(PIN_SWITCH, INPUT_PULLUP);
+    DDRC = 0xff;
+    DDRA = 0Xff;
     playableArea.clear();
     Serial.begin(9600);
 }
@@ -57,15 +59,18 @@ void updatePantalla()
     static byte p2Data[2];
     
     //Actualizar la pantalla 2
-    p2Data[0] = ~(1 << updatePantallaCount);//el bit en 0 sera la fila que se multiplexara en esta corrida
-    p2Data[1] = playableArea.gameArray[updatePantallaCount];
-    driverP2.send(p2Data);
+    //p2Data[0] = ~(1 << updatePantallaCount);//el bit en 0 sera la fila que se multiplexara en esta corrida
+    //p2Data[1] = playableArea.gameArray[updatePantallaCount];
+    //driverP2.send(p2Data);
+    PORTA = ~(1 << updatePantallaCount);//el bit en 0 sera la fila que se multiplexara en esta corrida
+    PORTC = playableArea.gameArray[updatePantallaCount];
 
     //Actualiza la pantalla 1
     driverP1.setRow(updatePantallaCount, playableArea.gameArray[(GAME_ARRAY_SIZE - 2) - updatePantallaCount]);//Invierte la segunda pantalla para que se pueda ver mejor en el protoboard que ya esta hecho
 
     updatePantallaCount++;
     updatePantallaCount &= 0b111;
+    delayMicroseconds(2000);
 }
 
 const byte S_MENSAJE = 0;

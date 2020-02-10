@@ -18,12 +18,12 @@ class JugadorClass
 	 char xPos;
 	 const char yPos = 14;
 	 void clearPart();
+	 bool tryMove(char dir);
 
  public:
 	 JugadorClass(char xPos);
 	 //false si murio
 	 bool tryUpdate(char dir);
-	 bool tryMove(char dir);
 	 void setXPos(char xPos);
 	 void redraw();
 };

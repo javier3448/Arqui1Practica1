@@ -15,8 +15,8 @@ class EnemigoClass
 {
 private:
 	static byte sprite[SIZEOF_ENEMY_SPRITE];
-	static unsigned int tickCount;
-	static unsigned int tickFrequency;
+	static unsigned long tickCount;
+	static unsigned long tickFrequency;
 	char xPos;
 	char yPos;
 	void clearPart();
@@ -34,6 +34,8 @@ public:
 	static void startUpdate();
 	char update();
 	static void endUpdate();
+	static void reset();
+	static void increaseTickFrequency();
 	void redraw();
 	void destroy();
 	char getXPos();
