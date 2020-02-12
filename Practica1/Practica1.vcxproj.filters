@@ -117,6 +117,9 @@
     <ClInclude Include="..\..\..\..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega\pins_arduino.h">
       <Filter>src\_micro-api-readonly\core</Filter>
     </ClInclude>
+    <ClInclude Include="Mensaje.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Max7219Driver.cpp">
@@ -211,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino\WString.cpp">
       <Filter>src\_micro-api-readonly\core</Filter>
+    </ClCompile>
+    <ClCompile Include="Mensaje.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

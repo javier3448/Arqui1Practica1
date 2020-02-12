@@ -13,12 +13,12 @@
 #include "Sipo3.h"
 #include "Definiciones.h"
 #include "Juego.h"
-
+#include "Mensaje.h"
 
 Max7219Driver driverP1 = Max7219Driver(53);
 Sipo3 driverP2 = Sipo3(7, 6, 5, LSBFIRST, 2);
 JuegoClass juego = JuegoClass();
-//Mensaje mensaje = Mensaje();
+MensajeClass mensaje = MensajeClass();
 
 // the setup function runs once when you press reset or power the board
 const byte PIN_BTN_IZQ = 2;
@@ -38,6 +38,12 @@ void setup() {
     DDRA = 0Xff;
     playableArea.clear();
     Serial.begin(9600);
+	if (digitalRead(PIN_SWITCH) == HIGH) {
+		inPosAbajo();
+	}
+	else {
+		inPosArriba();
+	}
 }
 
 
@@ -50,6 +56,24 @@ void loop() {
         updateEstados();
     }
     loopCount++;
+}
+
+//inicializan en vector de posiciones  del mensaje dependiendo de la lectura del switch
+void inPosArriba() {
+	int inPos = 0;
+	for (int i = 0; i < SIZE_OF_MESSAGE; i++) {
+		inPos = inPos - 8;
+		POSICIONES[i] = inPos;
+	}
+}
+
+void inPosAbajo() {
+	int inPos = 8;
+	for (int i = 0; i < SIZE_OF_MESSAGE; i++) {
+		inPos = inPos + 8;
+		POSICIONES[i] = inPos;
+		//Serial.println(POSICIONES[i]);
+	}
 }
 
 //Actualiza ambas pantallas, 
@@ -104,8 +128,8 @@ void updateEstados() {
         //Codigo para manejar estado: S_MENSAJE
         //velocidadMensaje = analogRead(A5);
         playableArea.gameArray[0] = S_MENSAJE;//Para debugging
-        //mensaje.update(analogRead(PIN_POT), !digitalRead(PIN_SWITCH)); //TODO
-        if (isStartPressed && !wasStartPressed)
+        mensaje.setUp(analogRead(PIN_POT), !digitalRead(PIN_SWITCH)); //TODO
+		if (isStartPressed && !wasStartPressed)
         {
             holdInicial = millis();
             estadoActual = S_HOLD_INICIO;
@@ -114,6 +138,7 @@ void updateEstados() {
         {
             playableArea.gameArray[1] = debCount;//Para debugging
         }
+		auxMensaje++;
         break;
     case S_HOLD_INICIO:
         //Codigo para manejar estado: S_HOLD_INICIO

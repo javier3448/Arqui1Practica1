@@ -9,10 +9,14 @@
 	#include "WProgram.h"
 #endif
 
-#define SIZEOF_ALF 20
+#define SIZEOF_ALF 24
 #define SIZEOF_MYCHAR 8
+#define SIZE_OF_MESSAGE 23
 
 extern byte alfabeto[SIZEOF_ALF][SIZEOF_MYCHAR];
 extern byte ALF_CERO;
+extern char auxMensaje;
+extern int POSICIONES[SIZE_OF_MESSAGE];
+
 #endif
 
