@@ -38,10 +38,10 @@ bool JugadorClass::tryMove(char dir)
 {
 	clearPart();
 	char xVirtual = xPos + dir;
-	if (xVirtual < 0 || xVirtual > (sizeof(playableArea.gameArray[0]) * 8) - 3) {
-		redraw();
-		return true;
-	}
+//	if (xVirtual < 0 || xVirtual > (sizeof(playableArea.gameArray[0]) * 8) - 3) {
+//		redraw();
+//		return true;
+//	}
 	if (playableArea.collides(xVirtual, yPos, sprite, SIZEOF_PLAYER_SPRITE))
 	{
 		//murio

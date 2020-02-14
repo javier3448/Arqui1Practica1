@@ -37,7 +37,6 @@ void setup() {
     DDRC = 0xff;
     DDRA = 0Xff;
     playableArea.clear();
-    Serial.begin(9600);
 	if (digitalRead(PIN_SWITCH) == HIGH) {
 		inPosAbajo();
 	}
@@ -83,9 +82,6 @@ void updatePantalla()
     static byte p2Data[2];
     
     //Actualizar la pantalla 2
-    //p2Data[0] = ~(1 << updatePantallaCount);//el bit en 0 sera la fila que se multiplexara en esta corrida
-    //p2Data[1] = playableArea.gameArray[updatePantallaCount];
-    //driverP2.send(p2Data);
     PORTA = ~(1 << updatePantallaCount);//el bit en 0 sera la fila que se multiplexara en esta corrida
     PORTC = playableArea.gameArray[updatePantallaCount];
 
@@ -119,30 +115,22 @@ unsigned long holdInicial = 0;//Sirve para ambos estados hold. indica cuando emp
 
 //Por ahora no estan programadas la funciones para conseguir los input de los botones
 void updateEstados() {
-    static int debCount = 0;
-
     updateInput();
     switch (estadoActual)
     {
     case S_MENSAJE:
         //Codigo para manejar estado: S_MENSAJE
         //velocidadMensaje = analogRead(A5);
-        playableArea.gameArray[0] = S_MENSAJE;//Para debugging
         mensaje.setUp(analogRead(PIN_POT), !digitalRead(PIN_SWITCH)); //TODO
 		if (isStartPressed && !wasStartPressed)
         {
             holdInicial = millis();
             estadoActual = S_HOLD_INICIO;
         }
-        if (isRightPressed)
-        {
-            playableArea.gameArray[1] = debCount;//Para debugging
-        }
 		auxMensaje++;
         break;
     case S_HOLD_INICIO:
         //Codigo para manejar estado: S_HOLD_INICIO
-        playableArea.gameArray[0] = S_HOLD_INICIO;//Para debugging
         //mensaje.update(analogRead(PIN_POT), !digitalRead(PIN_SWITCH));
         if (millis() - holdInicial >= 3000) 
         {
@@ -172,12 +160,10 @@ void updateEstados() {
             playableArea.draw(0, 5, alfabeto[numero], SIZEOF_MYCHAR);
             numero = numero - 1;
         }
-        playableArea.gameArray[0] = S_CONTEO;//Para debugging
         //Continuar en el estado hasta que pasen 3 segundos luego ir a juego
         break;
     case S_JUEGO:
         //Codigo para manejar estado: S_JUEGO
-        //playableArea.gameArray[0] = S_JUEGO;//Para debugging
         if (isStartPressed && !wasStartPressed) 
         {
             holdInicial = millis();
@@ -196,7 +182,6 @@ void updateEstados() {
         break;
     case S_HOLD_PAUSA:
         //Codigo para manejar estado: S_PAUSA
-        playableArea.gameArray[0] = S_HOLD_PAUSA;//Para debugging
         juego.pauseAndPrintScore();
         //juego.pause(); Le dice al juego que haga el render de pause();
         if (!isStartPressed && !wasStartPressed)
@@ -214,7 +199,6 @@ void updateEstados() {
         //Continuar en el estado hasta que pasen 3 segundos, luego ir a mensaje
         break;
     case S_PAUSA:
-        playableArea.gameArray[0] = S_PAUSA;//Para debugging
         //juego.pause(); Le dice al juego que haga el render de pause();
         juego.pauseAndPrintScore();
         if (isStartPressed && !wasStartPressed)
@@ -227,7 +211,6 @@ void updateEstados() {
     case S_GAME_OVER:
         //Codigo para manejar estado: S_GAME_OVER
         //juego.gameOver(); Le dice al juego que haga el render de gameOver();
-        playableArea.gameArray[0] = S_GAME_OVER;//Para debugging
         juego.pauseAndPrintScore();
         if (isStartPressed && !wasStartPressed) 
         {

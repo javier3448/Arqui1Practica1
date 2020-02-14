@@ -62,7 +62,7 @@ void PlayableAreaClass::clearOnes(char x, char y, byte data[], byte sizeOfData)
 		if (currY < 0)
 			continue;
 		byte currData = data[i];
-		if (x < 0)
+		if (x < 0) 
 			currData = currData << -x;//Quita el negativo
 		else
 			currData = currData >> x;
@@ -131,6 +131,7 @@ void PlayableAreaClass::drawRow(char x, char y, byte data)
 bool PlayableAreaClass::collides(char x, char y, byte buffer[], byte sizeOfData)//x<0 y<0  va a dar true algunos casos. Siempre y cuando las piezas empizas tenga llena la pos 0,0 no hay problema
 {
 	//Talvez sea mejor hacer los 3 ciclos en 1 solo for de 0 a sizeOfData con 3 if adentro, cada if lidea con un caso (gameArrayRow a revisar: negativo, adentro de la pantalla y igual o mayor a GAME_ARRAY_SIZE)
+	//No se que hice aqui, talvez sea mejor usar el drawOnes como base
 	byte i = 0;
 	for (; i + y < 0 && i < sizeOfData; i++)
 	{
@@ -163,4 +164,3 @@ bool PlayableAreaClass::collides(char x, char y, byte buffer[], byte sizeOfData)
 
 	return false;
 }
-
